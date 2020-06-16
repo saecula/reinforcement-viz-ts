@@ -7,7 +7,7 @@ const getCss = (theme: ThemeType) => ({
   display: 'flex',
   padding: '10px',
   alignText: 'center',
-  justifyContent: 'center',
+  justifyContent: 'space-between',
   alignItems: 'center',
   fontFamily: 'Helvetica',
   fontSize: '1.7em',
@@ -16,7 +16,6 @@ const getCss = (theme: ThemeType) => ({
   top: '0px',
   left: '0px',
   width: '100%',
-  flex: 0.04,
 });
 
 const Header: React.FunctionComponent<{}> = () => {
@@ -29,9 +28,15 @@ const Header: React.FunctionComponent<{}> = () => {
   );
 };
 
-const Title = (props: { theme: ThemeType }) => {
-  return <h2 style={{ color: props.theme.onBackground }}>hi hello</h2>;
-};
+const Title = (props: { theme: ThemeType }) => (
+  <Box
+    css={{
+      color: props.theme.onBackground,
+    }}
+  >
+    Reinforcement Viz
+  </Box>
+);
 
 const getToggleCss = (theme: ThemeType): CSSObject => ({
   color: theme.onBackground,
