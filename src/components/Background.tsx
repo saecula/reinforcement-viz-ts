@@ -2,12 +2,11 @@ import React from 'react';
 import { ThemeContext, ThemeType } from '../contexts';
 
 const getCss = (theme: ThemeType): React.CSSProperties => ({
-  width: '100%',
-  height: '100%',
+  width: '100vw',
+  height: '100vh',
   backgroundColor: theme.background,
   color: theme.onBackground,
-  position: 'absolute',
-  zIndex: -1,
+  position: 'relative',
   top: 0,
   left: 0,
 });

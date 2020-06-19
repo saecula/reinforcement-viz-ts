@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
-import { ThemeContext, ThemeType } from 'contexts';
-
-const getCss = (theme: ThemeType): React.CSSProperties => ({
-  position: 'absolute',
-  background: theme.background,
-});
+import React from 'react';
+import Scenarios from './scenarios';
+import Dashboard from './dashboard';
 
 const Content: React.FunctionComponent<{}> = () => {
-  const { theme } = useContext(ThemeContext);
-  return <div style={getCss(theme)}></div>;
+  return (
+    <>
+      <Scenarios />
+      <Dashboard />
+    </>
+  );
 };
 
 export default Content;

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Box, Button } from 'rebass';
-import { CSSObject } from 'styled-components';
+import { Box } from 'rebass';
 import { ThemeContext, ThemeType } from 'contexts';
+import ThemeToggle from './ThemeToggle';
 
 const getCss = (theme: ThemeType) => ({
   display: 'flex',
@@ -20,6 +20,7 @@ const getCss = (theme: ThemeType) => ({
 
 const Header: React.FunctionComponent<{}> = () => {
   const { theme, toggle } = useContext(ThemeContext);
+
   return (
     <Box style={getCss(theme)}>
       <Title theme={theme} />
@@ -28,31 +29,12 @@ const Header: React.FunctionComponent<{}> = () => {
   );
 };
 
-const Title = (props: { theme: ThemeType }) => (
-  <Box
-    css={{
-      color: props.theme.onBackground,
-    }}
-  >
-    Reinforcement Viz
-  </Box>
-);
+const Title = (props: { theme: ThemeType }) => {
+  const css = {
+    color: props.theme.onBackground,
+  };
 
-const getToggleCss = (theme: ThemeType): CSSObject => ({
-  color: theme.onBackground,
-  backgroundColor: theme.background,
-  fontSize: '17px',
-});
-
-const ThemeToggle = (props: {
-  theme: ThemeType;
-  toggle: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-}) => {
-  return (
-    <Button css={getToggleCss(props.theme)} onClick={props.toggle}>
-      light | dark
-    </Button>
-  );
+  return <Box css={css}>Reinforcement Viz</Box>;
 };
 
 export default Header;

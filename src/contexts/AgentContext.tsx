@@ -1,45 +1,21 @@
-import React, { createContext, useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import React, { createContext } from 'react';
+import useAgents, { AgentType } from './AgentState';
 
-interface AgentParam {
-  name: 'alpha' | 'beta' | 'gamma' | 'epsilon';
-  defaultValue: number;
-}
-
-export interface AgentType {
-  id?: string;
-  key: string;
-  displayName: string;
-  params: AgentParam[];
-}
-
-const defaultAgent: AgentType = {
-  id: uuid(),
-  key: 'MONTE_CARLO',
-  displayName: 'Monte Carlo',
-  params: [
-    { name: 'alpha', defaultValue: 0.5 },
-    { name: 'gamma', defaultValue: 0.8 },
-    { name: 'epsilon', defaultValue: 0.1 },
-  ],
-};
-
-const AgentContext = createContext({
-  Agents: [defaultAgent],
-  utils: {
-    addAgent: (agent: AgentType) => {},
-    removeAgent: (id: string) => {},
-  },
+const AgentContext = createContext<{
+  agents: Array<AgentType>;
+  addAgent: (agent: AgentType) => void;
+  removeAgent: (id: string) => void;
+}>({
+  agents: [],
+  addAgent: (agent: AgentType) => {},
+  removeAgent: (id: string) => {},
 });
 
 export const AgentProvider: React.FunctionComponent<{}> = ({ children }) => {
-  const [Agents, setAgents] = useState([defaultAgent]);
-  const addAgent = (agent: AgentType): void =>
-    setAgents((prevAgents) => [...prevAgents, { ...agent, id: uuid() }]);
-  const removeAgent = (id: string): void =>
-    setAgents((prevAgents) => prevAgents.filter((agent) => agent.id !== id));
+  const { agents, addAgent, removeAgent } = useAgents();
+
   return (
-    <AgentContext.Provider value={{ Agents, utils: { addAgent, removeAgent } }}>
+    <AgentContext.Provider value={{ agents, addAgent, removeAgent }}>
       {children}
     </AgentContext.Provider>
   );
