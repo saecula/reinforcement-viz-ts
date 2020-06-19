@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box } from 'rebass';
-import { FakeEnvType } from './SingleScenario';
+import { EnvironmentType } from '../../contexts';
 
-const Grid: React.FunctionComponent<{ env: FakeEnvType }> = (props) => {
+const Grid: React.FunctionComponent<{ env: EnvironmentType }> = (props) => {
   const { env: environment } = props;
   return (
     <div

@@ -16,18 +16,7 @@ const css: CSSObject = {
   marginBottom: '10px',
   height: '100%',
   padding: '8px',
-  // todo: agent color info
 };
-
-export interface FakeEnvType {
-  key: string;
-  displayName: string;
-  states: (any[] | undefined)[];
-}
-
-const O = 'white';
-const R = 'red';
-const B = 'black';
 
 const SingleScenario: React.FunctionComponent = () => {
   const { environment } = useContext(EnvironmentContext);
