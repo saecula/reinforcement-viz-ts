@@ -1,9 +1,8 @@
 import React from 'react';
 import { Box, Button } from 'rebass';
 import { Label, Select, Input } from '@rebass/forms';
-import { ThemeType } from 'contexts';
+import { ThemeType, useAgentForm } from 'contexts';
 import { agentsList } from '../../constants';
-import useAgentForm from './useAgentForm';
 
 const AgentForm: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
   const { theme } = props; //todo: style

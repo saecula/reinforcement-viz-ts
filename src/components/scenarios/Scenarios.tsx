@@ -1,27 +1,26 @@
 import React, { useContext } from 'react';
 import { Box } from 'rebass';
 import { CSSObject } from 'styled-components';
-import { ThemeType, ThemeContext } from 'contexts';
+import { ThemeContext } from 'contexts';
 import AgentForm from './AgentForm';
 import EnvironmentForm from './EnvironmentForm';
-import ScenarioBox from './ScenarioBox';
+import ScenarioViewer from './ScenarioViewer';
 
-const getCss = (theme: ThemeType): CSSObject => ({
+const css: CSSObject = {
   display: 'flex',
   padding: '15px',
-  backgroundColor: theme.background,
   flexDirection: 'column',
   width: '100%',
   flex: 2,
-});
+};
 
 const Scenarios = () => {
   const { theme } = useContext(ThemeContext);
   return (
-    <Box css={getCss(theme)}>
+    <Box css={css}>
       {false && <AgentForm theme={theme} />}
       <EnvironmentForm theme={theme} />
-      <ScenarioBox theme={theme} />
+      <ScenarioViewer theme={theme} />
     </Box>
   );
 };

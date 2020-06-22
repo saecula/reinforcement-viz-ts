@@ -11,3 +11,4 @@ export {
   default as EnvironmentContext,
   EnvironmentProvider,
 } from './EnvironmentContext';
+export { default as useAgentForm } from './useAgentForm';

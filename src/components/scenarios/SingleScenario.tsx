@@ -5,16 +5,13 @@ import Grid from './Grid';
 import { EnvironmentContext } from 'contexts';
 
 const css: CSSObject = {
-  minWidth: '40%',
+  width: '100%',
+  height: '100%',
   textAlign: 'center',
-  flexGrow: 1,
-  flexShrink: 1,
-  flexbasis: 'auto',
-  minHeight: 0,
+  minHeight: '60vh',
   overflow: 'hidden',
   marginTop: '10px',
   marginBottom: '10px',
-  height: '100%',
   padding: '8px',
 };
 

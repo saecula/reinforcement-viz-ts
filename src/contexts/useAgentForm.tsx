@@ -1,6 +1,6 @@
-import { useState, useContext } from 'react';
-import { AgentType } from '../../contexts';
-import { agentsList } from '../../constants';
+import { useState } from 'react';
+import { AgentType } from '.';
+import { agentsList } from '../constants';
 
 const inputsFrom = (agent: AgentType) =>
   agent.params.reduce(

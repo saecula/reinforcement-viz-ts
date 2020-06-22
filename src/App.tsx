@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import StandardPage from 'components/StandardPage';
 import {
   ThemeProvider,
