@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-interface AgentParameter {
+export interface AgentParameter {
   name: 'alpha' | 'beta' | 'gamma' | 'epsilon';
   defaultValue: number;
 }

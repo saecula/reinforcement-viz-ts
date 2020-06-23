@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box } from 'rebass';
 import SingleScenario from './SingleScenario';
-import { ThemeType } from 'contexts';
+import { ThemeType, AgentContext } from 'contexts';
 
 const getCss = (
   theme: ThemeType,
@@ -10,6 +10,7 @@ const getCss = (
   display: 'flex',
   flexDirection: 'row',
   backgroundColor: theme.surface,
+  flexWrap: scenarioNum === 2 ? 'nowrap' : 'wrap',
   marginTop: '10px',
   marginBottom: '10px',
   minHeight: '60vh',
@@ -19,9 +20,13 @@ const ScenarioViewer: React.FunctionComponent<{ theme: ThemeType }> = (
   props
 ) => {
   const { theme } = props;
-  const scenarioNum = 2; //temporary
+  const { agents } = useContext(AgentContext);
+  const scenarioNum = 3; //temporary
   return (
     <div style={getCss(theme, scenarioNum)}>
+      <Box width={`${100 / scenarioNum}%`}>
+        <SingleScenario />
+      </Box>
       <Box width={`${100 / scenarioNum}%`}>
         <SingleScenario />
       </Box>

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box } from 'rebass';
 import { CSSObject } from 'styled-components';
 import StartButton from './StartButton';
 import AgentsList from './AgentsList';
 import ResultsGraphs from './ResultsGraphs';
+import { ThemeContext } from 'contexts';
 
 const css: CSSObject = {
   bottom: '0px',
@@ -11,18 +12,18 @@ const css: CSSObject = {
   width: '100%',
   display: 'flex',
   flex: 1,
-  minWidth: 0,
-  minHeight: 0,
   overflow: 'hidden',
-  marginBottom: '10px',
-  marginTop: '10px',
+  margin: '10px',
+  height: '23%',
+  position: 'sticky',
 };
 
 const Dashboard: React.FunctionComponent = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <Box css={css}>
       <StartButton />
-      <AgentsList />
+      <AgentsList theme={theme} />
       <ResultsGraphs />
     </Box>
   );

@@ -1,51 +1,48 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { AgentType } from '.';
 import { agentsList } from '../constants';
-
-const inputsFrom = (agent: AgentType) =>
-  agent.params.reduce(
-    (allParams, param) => ({ ...allParams, [param.name]: param.defaultValue }),
-    {}
-  );
+import AgentContext from './AgentContext';
 
 const useAgentForm = (): {
-  agent: AgentType;
+  editingAgent: AgentType;
   handleAgentChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleChange: (event: React.FormEvent<HTMLDivElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLDivElement>) => void;
 } => {
-  //   const { addScenario } = useContext(Ctx);
-  //   const { closeForm } = useContext(ScenarioCtx);
+  const { addAgent } = useContext(AgentContext);
 
-  const [agent, setAgent] = useState(agentsList[0]);
-  const [inputs, setInputs] = useState(inputsFrom(agent));
+  const [editingAgent, setEditingAgent] = useState(agentsList[0]);
+  const [params, setParams] = useState(editingAgent.params);
+  const setInputs = (name: string, value: string) => {
+    const parsed = parseInt(value);
+    setParams((prev) =>
+      prev.map((p) => (p.name === name ? { ...p, defaultValue: parsed } : p))
+    );
+  };
 
   const handleAgentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const target = event.target as HTMLSelectElement;
     const { value } = target;
     const newAgent = agentsList.find((a) => a.key === value);
     if (!!newAgent) {
-      setAgent(newAgent);
-      setInputs(inputsFrom(newAgent));
+      setEditingAgent(newAgent);
+      setParams(newAgent.params);
     }
   };
+
   const handleChange = (event: React.FormEvent<HTMLDivElement>) => {
     const target = event.target as HTMLTextAreaElement;
     const { name, value } = target;
-    setInputs({ ...inputs, [name]: parseFloat(value) });
+    setInputs(name, value);
   };
+
   const handleSubmit = (event: React.FormEvent<HTMLDivElement>) => {
     if (event) event.preventDefault();
-    const newScenario = {
-      name: agent.displayName,
-      options: { ...inputs },
-    };
-    // addScenario(newScenario);
-    // closeForm();
+    addAgent(editingAgent);
   };
 
   return {
-    agent,
+    editingAgent,
     handleAgentChange,
     handleChange,
     handleSubmit,

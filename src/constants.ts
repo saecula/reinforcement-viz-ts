@@ -1987,7 +1987,7 @@ export const agentsList: AgentType[] = [
     displayName: 'SARSA',
     params: [
       { name: alpha, defaultValue: 0.5 },
-      { name: gamma, defaultValue: 0.8 },
+      { name: gamma, defaultValue: 0.2 },
       { name: epsilon, defaultValue: 0.1 },
     ],
   },
@@ -1995,9 +1995,8 @@ export const agentsList: AgentType[] = [
     key: 'Q_LEARNING',
     displayName: 'Q learning',
     params: [
-      { name: alpha, defaultValue: 0.5 },
+      { name: alpha, defaultValue: 0.4 },
       { name: gamma, defaultValue: 0.8 },
-      { name: epsilon, defaultValue: 0.1 },
     ],
   },
   {

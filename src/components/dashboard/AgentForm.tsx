@@ -4,18 +4,39 @@ import { Label, Select, Input } from '@rebass/forms';
 import { ThemeType, useAgentForm } from 'contexts';
 import { agentsList } from '../../constants';
 
-const AgentForm: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
-  const { theme } = props; //todo: style
+const AgentForm: React.FunctionComponent<{
+  theme: ThemeType;
+  closeForm: () => void;
+}> = (props) => {
+  const { theme, closeForm } = props; //todo: style
   const {
-    agent,
+    editingAgent,
     handleAgentChange,
     handleChange,
     handleSubmit,
   } = useAgentForm();
+
+  const handleFormSubmit = (event: React.FormEvent<HTMLDivElement>): void => {
+    handleSubmit(event);
+    closeForm();
+  };
+
   return (
-    <Box as="form" onSubmit={handleSubmit}>
-      <Label>choose an Agent</Label>
+    <Box
+      as="form"
+      onSubmit={handleFormSubmit}
+      css={{
+        position: 'fixed',
+        top: '200px',
+        padding: '20px',
+        background: theme.background,
+        minWidth: '300px',
+      }}
+    >
+      <Label marginBottom="10px">Add another Agent</Label>
       <Select
+        backgroundColor={theme.surface}
+        color={theme.onSurface}
         defaultValue={agentsList[0].displayName}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           handleAgentChange(event)
@@ -27,10 +48,12 @@ const AgentForm: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
           </option>
         ))}
       </Select>
-      {agent.params.map((param, idx) => (
+      {editingAgent.params.map((param, idx) => (
         <Box key={idx}>
-          <Label>{param.name}</Label>
+          <Label margin="5px">{param.name}</Label>
           <Input
+            backgroundColor={theme.surface}
+            color={theme.onSurface}
             type="number"
             step="any"
             placeholder={param.defaultValue.toString()}
@@ -39,7 +62,7 @@ const AgentForm: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
           ></Input>
         </Box>
       ))}
-      <Button type="submit" color="black">
+      <Button type="submit" css={{ color: 'black', marginTop: '10px' }}>
         poof
       </Button>
     </Box>

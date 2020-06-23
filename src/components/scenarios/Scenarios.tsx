@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Box } from 'rebass';
 import { CSSObject } from 'styled-components';
 import { ThemeContext } from 'contexts';
-import AgentForm from './AgentForm';
 import EnvironmentForm from './EnvironmentForm';
 import ScenarioViewer from './ScenarioViewer';
 
@@ -18,7 +17,6 @@ const Scenarios = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <Box css={css}>
-      {false && <AgentForm theme={theme} />}
       <EnvironmentForm theme={theme} />
       <ScenarioViewer theme={theme} />
     </Box>
