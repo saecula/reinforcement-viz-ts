@@ -8,11 +8,8 @@ const css: CSSObject = {
   width: '100%',
   height: '100%',
   textAlign: 'center',
-  minHeight: '60vh',
   overflow: 'hidden',
-  marginTop: '10px',
-  marginBottom: '10px',
-  padding: '8px',
+  padding: '15px',
 };
 
 const SingleScenario: React.FunctionComponent = () => {

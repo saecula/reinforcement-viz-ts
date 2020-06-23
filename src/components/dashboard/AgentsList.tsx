@@ -7,7 +7,9 @@ import { ThemeType, AgentContext } from 'contexts';
 
 const css: CSSObject = {
   width: '33vw',
-  height: '33vw',
+  textAlign: 'center',
+  alignItems: 'stretch',
+  flexGrow: 2,
 };
 
 const AgentsList: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
@@ -17,30 +19,26 @@ const AgentsList: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
   return (
     <Box css={css}>
       {formView && (
-        <AgentForm theme={theme} closeForm={() => toggleFormView(false)} />
+        <AgentForm
+          agent={null}
+          theme={theme}
+          closeForm={() => toggleFormView(false)}
+        />
       )}
       {agents.map((agent, i) => (
-        <AgentPanel key={i} agent={agent} />
+        <AgentPanel
+          key={i}
+          hasAgent={{
+            agent,
+            edit: () => toggleFormView(true),
+            remove: removeAgent,
+          }}
+          theme={theme}
+        />
       ))}
-      <Button
-        onClick={() => toggleFormView(true)}
-        css={{
-          color: theme.onSurface,
-          backgroundColor: theme.surface,
-          margin: '5px',
-        }}
-      >
-        +
-      </Button>
-      {/* <Button
-        css={{
-          color: theme.onSurface,
-          backgroundColor: theme.surface,
-          margin: '5px',
-        }}
-      >
-        remove!
-      </Button> */}
+      {agents.length < 4 && (
+        <AgentPanel add={() => toggleFormView(true)} theme={theme} />
+      )}
     </Box>
   );
 };

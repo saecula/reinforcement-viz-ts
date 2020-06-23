@@ -13,9 +13,10 @@ const css: CSSObject = {
   display: 'flex',
   flex: 1,
   overflow: 'hidden',
-  margin: '10px',
   height: '23%',
   position: 'sticky',
+  paddingLeft: '15px',
+  paddingRight: '15px',
 };
 
 const Dashboard: React.FunctionComponent = () => {

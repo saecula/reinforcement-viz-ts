@@ -13,7 +13,7 @@ const getCss = (
   flexWrap: scenarioNum === 2 ? 'nowrap' : 'wrap',
   marginTop: '10px',
   marginBottom: '10px',
-  minHeight: '60vh',
+  minHeight: '58vh',
 });
 
 const ScenarioViewer: React.FunctionComponent<{ theme: ThemeType }> = (
@@ -21,20 +21,13 @@ const ScenarioViewer: React.FunctionComponent<{ theme: ThemeType }> = (
 ) => {
   const { theme } = props;
   const { agents } = useContext(AgentContext);
-  const scenarioNum = 3; //temporary
   return (
-    <div style={getCss(theme, scenarioNum)}>
-      <Box width={`${100 / scenarioNum}%`}>
-        <SingleScenario />
-      </Box>
-      <Box width={`${100 / scenarioNum}%`}>
-        <SingleScenario />
-      </Box>
-      <Box width={`${100 / scenarioNum}%`}>
-        <SingleScenario />
-      </Box>
-
-      {/* <SingleScenario /> */}
+    <div style={getCss(theme, agents.length)}>
+      {agents.map((agent) => (
+        <Box width={`${100 / agents.length}%`}>
+          <SingleScenario />
+        </Box>
+      ))}
     </div>
   );
 };

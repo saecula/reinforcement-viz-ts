@@ -3,7 +3,7 @@ import { ThemeContext, ThemeType } from '../contexts';
 
 const getCss = (theme: ThemeType): React.CSSProperties => ({
   width: '100vw',
-  height: '100vh',
+  height: '94vh',
   backgroundColor: theme.background,
   color: theme.onBackground,
   position: 'relative',

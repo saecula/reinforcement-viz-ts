@@ -9,7 +9,7 @@ const Grid: React.FunctionComponent<{ env: EnvironmentType }> = (props) => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        height: 'calc(100% - 50px)',
+        height: '100%',
       }}
     >
       {environment.states.map((row: any, idx: number) => (

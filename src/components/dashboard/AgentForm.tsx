@@ -1,11 +1,12 @@
 import React from 'react';
 import { Box, Button } from 'rebass';
 import { Label, Select, Input } from '@rebass/forms';
-import { ThemeType, useAgentForm } from 'contexts';
+import { ThemeType, useAgentForm, AgentType } from 'contexts';
 import { agentsList } from '../../constants';
 
 const AgentForm: React.FunctionComponent<{
   theme: ThemeType;
+  agent: AgentType | null;
   closeForm: () => void;
 }> = (props) => {
   const { theme, closeForm } = props; //todo: style
@@ -54,7 +55,6 @@ const AgentForm: React.FunctionComponent<{
           <Input
             backgroundColor={theme.surface}
             color={theme.onSurface}
-            type="number"
             step="any"
             placeholder={param.defaultValue.toString()}
             name={param.name}

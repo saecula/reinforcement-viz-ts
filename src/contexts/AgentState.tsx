@@ -7,7 +7,7 @@ export interface AgentParameter {
 }
 
 export interface AgentType {
-  id?: string;
+  id: string;
   key: string;
   displayName: string;
   params: AgentParameter[];

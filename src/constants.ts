@@ -1974,6 +1974,7 @@ const epsilon = 'epsilon';
 
 export const agentsList: AgentType[] = [
   {
+    id: '0',
     key: 'MONTE_CARLO',
     displayName: 'Monte Carlo',
     params: [
@@ -1983,6 +1984,7 @@ export const agentsList: AgentType[] = [
     ],
   },
   {
+    id: '2',
     key: 'SARSA',
     displayName: 'SARSA',
     params: [
@@ -1992,6 +1994,7 @@ export const agentsList: AgentType[] = [
     ],
   },
   {
+    id: '3',
     key: 'Q_LEARNING',
     displayName: 'Q learning',
     params: [
@@ -2000,6 +2003,7 @@ export const agentsList: AgentType[] = [
     ],
   },
   {
+    id: '4',
     key: 'DOUBLE_Q_LEARNING',
     displayName: 'Double Q learning',
     params: [
@@ -2009,6 +2013,7 @@ export const agentsList: AgentType[] = [
     ],
   },
   {
+    id: '5',
     key: 'N_SOMETHINGOROTHER',
     displayName: 'n somethingorother',
     params: [
