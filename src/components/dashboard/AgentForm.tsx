@@ -6,16 +6,13 @@ import { agentsList } from '../../constants';
 
 const AgentForm: React.FunctionComponent<{
   theme: ThemeType;
-  agent: AgentType | null;
+  agent: AgentType;
   closeForm: () => void;
 }> = (props) => {
-  const { theme, closeForm } = props; //todo: style
-  const {
-    editingAgent,
-    handleAgentChange,
-    handleChange,
-    handleSubmit,
-  } = useAgentForm();
+  const { theme, agent, closeForm } = props; //todo: style
+  const { handleAgentChange, handleParamChange, handleSubmit } = useAgentForm(
+    agent
+  );
 
   const handleFormSubmit = (event: React.FormEvent<HTMLDivElement>): void => {
     handleSubmit(event);
@@ -38,7 +35,7 @@ const AgentForm: React.FunctionComponent<{
       <Select
         backgroundColor={theme.surface}
         color={theme.onSurface}
-        defaultValue={agentsList[0].displayName}
+        defaultValue={agent.displayName}
         onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
           handleAgentChange(event)
         }
@@ -49,16 +46,15 @@ const AgentForm: React.FunctionComponent<{
           </option>
         ))}
       </Select>
-      {editingAgent.params.map((param, idx) => (
+      {agent.params.map((param, idx) => (
         <Box key={idx}>
           <Label margin="5px">{param.name}</Label>
           <Input
             backgroundColor={theme.surface}
             color={theme.onSurface}
-            step="any"
-            placeholder={param.defaultValue.toString()}
+            defaultValue={param.defaultValue.toString()}
             name={param.name}
-            onChange={handleChange}
+            onChange={handleParamChange}
           ></Input>
         </Box>
       ))}

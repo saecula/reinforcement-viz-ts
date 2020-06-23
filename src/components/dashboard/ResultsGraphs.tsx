@@ -6,6 +6,7 @@ import { CSSObject } from 'styled-components';
 const css: CSSObject = {
   flexGrow: 15,
   maxWidth: '52%',
+  paddingLeft: '5px',
 };
 const ResultsGraphs: React.FunctionComponent = () => {
   const state = {
@@ -32,7 +33,7 @@ const ResultsGraphs: React.FunctionComponent = () => {
         data={state}
         options={{
           title: {
-            display: true,
+            display: false,
             text: 'rewards trend',
             fontSize: 20,
           },

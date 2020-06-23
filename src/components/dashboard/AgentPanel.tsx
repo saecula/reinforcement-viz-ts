@@ -2,6 +2,7 @@ import React from 'react';
 import { AgentType, ThemeType } from 'contexts';
 import { Box, Button } from 'rebass';
 import { CSSObject } from 'styled-components';
+import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 const css: CSSObject = {
   display: 'flex',
@@ -21,32 +22,56 @@ const AgentPanel: React.FunctionComponent<{
   key?: number;
   hasAgent?: {
     agent: AgentType;
-    edit: () => void;
+    edit: (agent: AgentType) => void;
     remove: (id: string) => void;
   };
   add?: () => void;
   theme: ThemeType;
-}> = ({ hasAgent, add }) => {
+}> = ({ hasAgent, add, theme }) => {
   return !!hasAgent ? (
     <Box css={css}>
       <Button
         css={{
-          color: 'black',
+          color: theme.onBackground,
+          backgroundColor: theme.background,
+          borderLeft: `2px solid ${theme.primary}`,
+          borderTop: `2px solid ${theme.primary}`,
+          borderBottom: `2px solid ${theme.primary}`,
           borderRadius: '0px',
           flexGrow: 5,
           display: 'flex',
           alignContent: 'space-between',
+          outline: 'none',
         }}
+        onClick={() => hasAgent.edit(hasAgent.agent)}
       >
-        <Box marginRight="20%">{hasAgent.agent.displayName}</Box>
-        <Box css={{ right: '0px' }}>
-          {hasAgent.agent.params.map(
-            (param) => `${letterMap[param.name]}: ${param.defaultValue + '  '}`
-          )}
+        <Box
+          css={{
+            width: '100%',
+            display: 'flex',
+            alignContent: 'space-between',
+          }}
+        >
+          <Box marginRight="20%">{hasAgent.agent.displayName}</Box>
+          <Box css={{ right: '0px' }}>
+            {hasAgent.agent.params.map(
+              (param) =>
+                `${letterMap[param.name]}: ${param.defaultValue + '  '}`
+            )}
+          </Box>
         </Box>
       </Button>
       <Button
-        css={{ color: 'black', borderRadius: '0px', flexGrow: 1 }}
+        css={{
+          color: theme.onBackground,
+          backgroundColor: theme.background,
+          borderRight: `2px solid ${theme.primary}`,
+          borderTop: `2px solid ${theme.primary}`,
+          borderBottom: `2px solid ${theme.primary}`,
+          borderRadius: '0px',
+          flexGrow: 1,
+          outline: 'none',
+        }}
         onClick={() => hasAgent.remove(hasAgent.agent.id)}
       >
         x
@@ -55,7 +80,14 @@ const AgentPanel: React.FunctionComponent<{
   ) : (
     <Box css={css}>
       <Button
-        css={{ color: 'black', borderRadius: '0px', flexGrow: 1 }}
+        css={{
+          color: theme.onSurface,
+          backgroundColor: theme.surface,
+          border: `2px solid ${theme.primary}`,
+          borderRadius: '0px',
+          flexGrow: 1,
+          outline: 'none',
+        }}
         onClick={add}
       >
         +

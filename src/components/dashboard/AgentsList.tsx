@@ -3,7 +3,8 @@ import { Button, Box } from 'rebass';
 import { CSSObject } from 'styled-components';
 import AgentForm from './AgentForm';
 import AgentPanel from './AgentPanel';
-import { ThemeType, AgentContext } from 'contexts';
+import { ThemeType, AgentType, AgentContext } from 'contexts';
+import { agentsList } from '../../constants';
 
 const css: CSSObject = {
   width: '33vw',
@@ -14,13 +15,18 @@ const css: CSSObject = {
 
 const AgentsList: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
   const { theme } = props;
-  const { agents, removeAgent } = useContext(AgentContext);
+  const { agents, removeAgent, editingAgent, setEditingAgent } = useContext(
+    AgentContext
+  );
+
+  console.log('editing from list', editingAgent);
+
   const [formView, toggleFormView] = useState(false);
   return (
     <Box css={css}>
       {formView && (
         <AgentForm
-          agent={null}
+          agent={editingAgent}
           theme={theme}
           closeForm={() => toggleFormView(false)}
         />
@@ -30,7 +36,10 @@ const AgentsList: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
           key={i}
           hasAgent={{
             agent,
-            edit: () => toggleFormView(true),
+            edit: (agent: AgentType) => {
+              setEditingAgent(agent);
+              toggleFormView(true);
+            },
             remove: removeAgent,
           }}
           theme={theme}
