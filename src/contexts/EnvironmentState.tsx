@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { envs } from '../constants';
+import { envs, defaultEpisodes } from '../constants';
 import { getLocal, setLocal } from 'utils';
 
 export interface EnvironmentType {
@@ -18,17 +18,22 @@ const useEnvironment = (): {
   const [environment, setEnv] = useState(
     localEnv !== null ? localEnv : envs[0]
   );
-  const [episodes, setEps] = useState(40);
+  const localEpisodes = getLocal<number>('episodes');
+  const [episodes, setEps] = useState(
+    localEpisodes !== null ? localEpisodes : defaultEpisodes
+  );
+
   const setEnvironment = (name: string) => {
     const newEnv = envs.find((e) => e.key === name);
     if (newEnv !== undefined) setEnv(newEnv);
   };
   const setEpisodes = (episodes: string) => {
     const parsed = parseInt(episodes);
-    if (parsed >= 1) setEps(parsed);
+    if (parsed >= 1 && !isNaN(parsed)) setEps(parsed);
   };
 
   useEffect(() => setLocal<EnvironmentType>('env', environment), [environment]);
+  useEffect(() => setLocal<number>('episodes', episodes), [episodes]);
 
   return {
     environment,

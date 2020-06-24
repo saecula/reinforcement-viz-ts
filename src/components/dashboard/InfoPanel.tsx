@@ -34,13 +34,14 @@ const InfoPanel: React.FunctionComponent<{
   remove: (id: string) => void;
 }> = ({ theme, agent, edit, remove }) => {
   return (
-    <Box css={getInfoCss(theme)} onClick={() => edit(agent)}>
+    <Box css={getInfoCss(theme)}>
       <Box
         css={{
           width: '100%',
           display: 'flex',
           alignItems: 'center',
         }}
+        onClick={() => edit(agent)}
       >
         <DisplayName name={agent.displayName} />
         <DisplayParams params={agent.params} />

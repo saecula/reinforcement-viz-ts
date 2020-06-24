@@ -1,5 +1,7 @@
 import { EnvironmentType, AgentType } from 'contexts';
 
+export const defaultEpisodes = 40;
+
 const O = 'white';
 const R = 'red';
 const B = 'black';
