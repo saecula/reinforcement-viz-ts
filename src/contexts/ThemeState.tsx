@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getLocal, setLocal } from '../utils';
 
 export interface ThemeType {
@@ -14,12 +14,12 @@ export interface ThemeType {
 
 export const lightTheme: ThemeType = {
   background: '#e3e3e3',
-  surface: '#f7f7f7',
-  primary: '#ededed',
+  surface: '#ededed',
+  primary: '#f7f7f7',
   secondary: '#0df2c9',
   onBackground: '#1a1a1a',
-  onSurface: '#292929',
-  onPrimary: '#171717',
+  onSurface: '#171717',
+  onPrimary: '#292929',
   onSecondary: '#d1d1d1',
 };
 
@@ -38,15 +38,14 @@ export const useTheme = (): {
   theme: ThemeType;
   toggleTheme: () => void;
 } => {
-  const localTheme = getLocal('theme');
+  const localTheme = getLocal<ThemeType>('theme');
   const [theme, setTheme] = useState(
     localTheme !== null ? localTheme : lightTheme
   );
-  const toggleTheme = () => {
-    const oppositeTheme = theme === lightTheme ? darkTheme : lightTheme;
-    setTheme(oppositeTheme);
-    setLocal('theme', oppositeTheme);
-  };
+  const toggleTheme = () =>
+    setTheme(theme === lightTheme ? darkTheme : lightTheme);
+  useEffect(() => setLocal<ThemeType>('theme', theme), [theme]);
+
   return {
     theme,
     toggleTheme,

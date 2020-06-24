@@ -1,17 +1,30 @@
 import React from 'react';
-import { Box, Button } from 'rebass';
-import { Label, Select, Input } from '@rebass/forms';
-import { ThemeType, useAgentForm, AgentType } from 'contexts';
-import { agentsList } from '../../constants';
+import { Box } from 'rebass';
+import { Label } from '@rebass/forms';
+import { CSSObject } from 'styled-components';
+import { ThemeType, AgentType } from 'contexts';
+import useAgentForm from './useAgentForm';
+import { AgentSelect, ParamInput, ButtonGroup } from './AgentFormSections';
+
+const getFormCss = (theme: ThemeType): CSSObject => ({
+  position: 'fixed',
+  top: '20vh',
+  left: '35vw',
+  padding: '20px',
+  background: theme.background,
+  minWidth: '300px',
+});
 
 const AgentForm: React.FunctionComponent<{
   theme: ThemeType;
   agent: AgentType;
+  isEdit: boolean;
   closeForm: () => void;
 }> = (props) => {
-  const { theme, agent, closeForm } = props; //todo: style
+  const { theme, agent, closeForm, isEdit } = props;
   const { handleAgentChange, handleParamChange, handleSubmit } = useAgentForm(
-    agent
+    agent,
+    isEdit
   );
 
   const handleFormSubmit = (event: React.FormEvent<HTMLDivElement>): void => {
@@ -20,47 +33,26 @@ const AgentForm: React.FunctionComponent<{
   };
 
   return (
-    <Box
-      as="form"
-      onSubmit={handleFormSubmit}
-      css={{
-        position: 'fixed',
-        top: '200px',
-        padding: '20px',
-        background: theme.background,
-        minWidth: '300px',
-      }}
-    >
-      <Label marginBottom="10px">Add another Agent</Label>
-      <Select
-        backgroundColor={theme.surface}
-        color={theme.onSurface}
-        defaultValue={agent.displayName}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-          handleAgentChange(event)
-        }
-      >
-        {agentsList.map((a, idx) => (
-          <option key={idx} value={a.key}>
-            {a.displayName}
-          </option>
-        ))}
-      </Select>
+    <Box as="form" onSubmit={handleFormSubmit} css={getFormCss(theme)}>
+      <Label marginBottom="10px">Add/edit Agent</Label>
+      <AgentSelect
+        theme={theme}
+        name={agent.displayName}
+        handleChange={handleAgentChange}
+      />
       {agent.params.map((param, idx) => (
-        <Box key={idx}>
-          <Label margin="5px">{param.name}</Label>
-          <Input
-            backgroundColor={theme.surface}
-            color={theme.onSurface}
-            defaultValue={param.defaultValue.toString()}
-            name={param.name}
-            onChange={handleParamChange}
-          ></Input>
-        </Box>
+        <>
+          <Label key={idx} margin="5px">
+            {param.name}
+          </Label>
+          <ParamInput
+            theme={theme}
+            param={param}
+            handleChange={handleParamChange}
+          />
+        </>
       ))}
-      <Button type="submit" css={{ color: 'black', marginTop: '10px' }}>
-        poof
-      </Button>
+      <ButtonGroup theme={theme} closeForm={closeForm} />
     </Box>
   );
 };

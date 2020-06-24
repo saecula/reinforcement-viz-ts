@@ -26,15 +26,17 @@ const EnvironmentForm: React.FunctionComponent<{ theme: ThemeType }> = (
   props
 ) => {
   const { theme } = props;
-  const { episodes, setEnvironment, setEpisodes } = useContext(
+  const { environment, episodes, setEnvironment, setEpisodes } = useContext(
     EnvironmentContext
   );
+  console.log('um, env: ', environment.displayName);
   return (
     <Box css={css}>
       <Box>
         <Select
           css={getSelectCss(theme)}
           onChange={(e) => setEnvironment(e.target.value)}
+          defaultValue={environment.key}
         >
           {envs.map((e, idx) => (
             <option key={idx} value={e.key}>

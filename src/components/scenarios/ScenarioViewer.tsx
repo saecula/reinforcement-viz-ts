@@ -23,8 +23,8 @@ const ScenarioViewer: React.FunctionComponent<{ theme: ThemeType }> = (
   const { agents } = useContext(AgentContext);
   return (
     <div style={getCss(theme, agents.length)}>
-      {agents.map((agent) => (
-        <Box width={`${100 / agents.length}%`}>
+      {agents.map((agent, idx) => (
+        <Box key={idx} width={`${100 / agents.length}%`}>
           <SingleScenario />
         </Box>
       ))}

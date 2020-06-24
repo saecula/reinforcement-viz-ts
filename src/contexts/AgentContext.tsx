@@ -7,14 +7,14 @@ const AgentContext = createContext<{
   editingAgent: AgentType;
   addAgent: (agent: AgentType) => void;
   removeAgent: (id: string) => void;
-  setAgentById: (id: string, agent: AgentType) => void;
+  setAgentById: (agent: AgentType) => void;
   setEditingAgent: React.Dispatch<React.SetStateAction<AgentType>>;
 }>({
   agents: [],
   editingAgent: agentsList[0],
   addAgent: (agent: AgentType) => {},
   removeAgent: (id: string) => {},
-  setAgentById: (id: string, agent: AgentType) => {},
+  setAgentById: (agent: AgentType) => {},
   setEditingAgent: () => {},
 });
 

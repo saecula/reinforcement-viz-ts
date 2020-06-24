@@ -1,18 +1,17 @@
 import { useContext } from 'react';
-import { AgentType } from '.';
-import { agentsList } from '../constants';
-import AgentContext from './AgentContext';
+import { AgentType } from '../../contexts';
+import { agentsList } from '../../constants';
+import AgentContext from '../../contexts/AgentContext';
 
 const useAgentForm = (
-  editingAgent: AgentType
+  editingAgent: AgentType,
+  isEdit: boolean
 ): {
   handleAgentChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   handleParamChange: (event: React.FormEvent<HTMLDivElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLDivElement>) => void;
 } => {
-  const { agents, addAgent, setAgentById, setEditingAgent } = useContext(
-    AgentContext
-  );
+  const { addAgent, setAgentById, setEditingAgent } = useContext(AgentContext);
 
   const handleAgentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const target = event.target as HTMLSelectElement;
@@ -21,7 +20,7 @@ const useAgentForm = (
     if (!!newAgent) {
       setEditingAgent((prevAgent: AgentType) => ({
         ...newAgent,
-        id: prevAgent.id.length > 1 ? prevAgent.id : newAgent.id,
+        id: isEdit ? prevAgent.id : newAgent.id,
       }));
     }
   };
@@ -32,16 +31,14 @@ const useAgentForm = (
     const param = editingAgent.params.find((p) => p.name === name);
     if (!!param) {
       const parsed = parseFloat(value);
-      if (parsed !== NaN) param.defaultValue = parseFloat(value);
+      if (isNaN(parsed)) param.defaultValue = parseFloat(value);
     }
   };
 
-  const isEdit = () => editingAgent.id.length > 1;
-
   const handleSubmit = (event: React.FormEvent<HTMLDivElement>) => {
     if (event) event.preventDefault();
-    if (isEdit()) {
-      setAgentById(editingAgent.id, editingAgent);
+    if (isEdit) {
+      setAgentById(editingAgent);
       setEditingAgent(agentsList[0]);
     } else {
       addAgent(editingAgent);

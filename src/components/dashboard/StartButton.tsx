@@ -5,16 +5,22 @@ import { ThemeContext } from 'contexts';
 const StartButton = () => {
   const { theme } = useContext(ThemeContext);
   return (
-    <Box css={{ flexGrow: 2, display: 'flex', alignItems: 'center' }}>
+    <Box
+      css={{
+        flexGrow: 2,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
       <div
-        onClick={() => {}}
+        onClick={() => console.log('whee')}
+        id="startbutton"
         style={{
           width: 0,
           height: 0,
-          borderTop: '3em solid transparent',
-          borderBottom: '3em solid transparent',
-
-          borderLeft: `3em solid ${theme.secondary}`,
+          borderTop: '5vw solid transparent',
+          borderBottom: '5vw solid transparent',
+          borderLeft: `5vw solid ${theme.secondary}`,
           marginLeft: '28%',
         }}
       />

@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { Button, Box } from 'rebass';
+import { Box } from 'rebass';
 import { CSSObject } from 'styled-components';
 import AgentForm from './AgentForm';
-import AgentPanel from './AgentPanel';
+import InfoPanel from './InfoPanel';
+import AddPanel from './AddPanel';
 import { ThemeType, AgentType, AgentContext } from 'contexts';
-import { agentsList } from '../../constants';
 
 const css: CSSObject = {
   width: '33vw',
@@ -19,37 +19,48 @@ const AgentsList: React.FunctionComponent<{ theme: ThemeType }> = (props) => {
     AgentContext
   );
 
-  console.log('editing from list', editingAgent);
+  const [formView, toggleFormView] = useState({ on: false, edit: false });
+  const openToEdit = (agent: AgentType): void => {
+    setEditingAgent(agent);
+    toggleFormView({ on: true, edit: true });
+  };
+  const openToAdd = (): void => toggleFormView({ on: true, edit: false });
+  const closeForm = (): void =>
+    toggleFormView((prev) => ({ ...prev, on: false }));
 
-  const [formView, toggleFormView] = useState(false);
   return (
     <Box css={css}>
-      {formView && (
+      {formView.on && (
         <AgentForm
-          agent={editingAgent}
           theme={theme}
-          closeForm={() => toggleFormView(false)}
+          agent={editingAgent}
+          isEdit={formView.edit}
+          closeForm={closeForm}
         />
       )}
-      {agents.map((agent, i) => (
-        <AgentPanel
-          key={i}
-          hasAgent={{
-            agent,
-            edit: (agent: AgentType) => {
-              setEditingAgent(agent);
-              toggleFormView(true);
-            },
-            remove: removeAgent,
-          }}
-          theme={theme}
-        />
+      {agents.map((agent, idx) => (
+        <PanelWrapper key={idx}>
+          <InfoPanel
+            theme={theme}
+            agent={agent}
+            edit={openToEdit}
+            remove={removeAgent}
+          />
+        </PanelWrapper>
       ))}
       {agents.length < 4 && (
-        <AgentPanel add={() => toggleFormView(true)} theme={theme} />
+        <PanelWrapper>
+          <AddPanel theme={theme} onClick={openToAdd} />
+        </PanelWrapper>
       )}
     </Box>
   );
+};
+
+const PanelWrapper: React.FunctionComponent<{
+  key?: number;
+}> = ({ children }) => {
+  return <Box css={{ display: 'flex', height: '25%' }}>{children}</Box>;
 };
 
 export default AgentsList;
