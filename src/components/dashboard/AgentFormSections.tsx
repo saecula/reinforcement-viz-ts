@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button } from 'rebass';
-import { Select, Input } from '@rebass/forms';
+import { Select, Input, Label } from '@rebass/forms';
 import { ThemeType } from 'contexts';
-import { agentsList } from '../../constants';
+import { agentsList, agentKeysEnum } from '../../constants';
 import { AgentParameter } from 'contexts/AgentState';
 
 export const AgentSelect: React.FunctionComponent<{
   theme: ThemeType;
-  name: string;
+  agentKey: agentKeysEnum;
   handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}> = ({ theme, name, handleChange }) => (
+}> = ({ theme, agentKey, handleChange }) => (
   <Select
     css={{
       backgroundColor: theme.surface,
@@ -18,10 +18,10 @@ export const AgentSelect: React.FunctionComponent<{
       borderRadius: '0px',
       outline: 'none',
     }}
-    defaultValue={name}
     onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
       handleChange(event)
     }
+    value={agentKey}
   >
     {agentsList.map((a, idx) => (
       <option key={idx} value={a.key}>
@@ -32,21 +32,25 @@ export const AgentSelect: React.FunctionComponent<{
 );
 
 export const ParamInput: React.FunctionComponent<{
+  key: number;
   theme: ThemeType;
   param: AgentParameter;
   handleChange: (event: React.FormEvent<HTMLDivElement>) => void;
 }> = ({ theme, param, handleChange }) => (
-  <Input
-    css={{
-      backgroundColor: theme.surface,
-      color: theme.onSurface,
-      border: 'none',
-      outline: 'none',
-    }}
-    defaultValue={param.defaultValue.toString()}
-    name={param.name}
-    onChange={handleChange}
-  ></Input>
+  <>
+    <Label margin="5px">{param.name}</Label>
+    <Input
+      css={{
+        backgroundColor: theme.surface,
+        color: theme.onSurface,
+        border: 'none',
+        outline: 'none',
+      }}
+      defaultValue={param.value.toString()}
+      name={param.name}
+      onChange={handleChange}
+    ></Input>
+  </>
 );
 
 export const ButtonGroup: React.FunctionComponent<{

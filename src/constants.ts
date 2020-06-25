@@ -2,6 +2,36 @@ import { EnvironmentType, AgentType } from 'contexts';
 
 export const defaultEpisodes = 40;
 
+export type envKeysEnum = 'CLIFF' | 'WIND' | 'TUNNEL' | 'CASINO';
+export type agentKeysEnum =
+  | 'MONTE_CARLO'
+  | 'SARSA'
+  | 'Q_LEARNING'
+  | 'DOUBLE_Q_LEARNING'
+  | 'N_SOMETHINGOROTHER';
+export type agentParamsEnum = 'alpha' | 'gamma' | 'epsilon';
+
+export interface ParamKeys {
+  alpha: number;
+  gamma: number;
+  epsilon: number;
+}
+
+export interface AgentKeys<T> {
+  MONTE_CARLO: T;
+  SARSA: T;
+  Q_LEARNING: T;
+  DOUBLE_Q_LEARNING: T;
+  N_SOMETHINGOROTHER: T;
+}
+
+export interface EnvironmentKeys<T> {
+  CLIFF: T;
+  WIND: T;
+  TUNNEL: T;
+  CASINO: T;
+}
+
 const O = 'white';
 const R = 'red';
 const B = 'black';
@@ -1980,9 +2010,9 @@ export const agentsList: AgentType[] = [
     key: 'MONTE_CARLO',
     displayName: 'Monte Carlo',
     params: [
-      { name: alpha, defaultValue: 0.5 },
-      { name: gamma, defaultValue: 0.8 },
-      { name: epsilon, defaultValue: 0.1 },
+      { name: alpha, value: 0.5 },
+      { name: gamma, value: 0.8 },
+      { name: epsilon, value: 0.1 },
     ],
   },
   {
@@ -1990,9 +2020,9 @@ export const agentsList: AgentType[] = [
     key: 'SARSA',
     displayName: 'SARSA',
     params: [
-      { name: alpha, defaultValue: 0.5 },
-      { name: gamma, defaultValue: 0.2 },
-      { name: epsilon, defaultValue: 0.1 },
+      { name: alpha, value: 0.5 },
+      { name: gamma, value: 0.2 },
+      { name: epsilon, value: 0.1 },
     ],
   },
   {
@@ -2000,8 +2030,9 @@ export const agentsList: AgentType[] = [
     key: 'Q_LEARNING',
     displayName: 'Q learning',
     params: [
-      { name: alpha, defaultValue: 0.4 },
-      { name: gamma, defaultValue: 0.8 },
+      { name: alpha, value: 0.4 },
+      { name: gamma, value: 0.8 },
+      { name: epsilon, value: 0.1 },
     ],
   },
   {
@@ -2009,9 +2040,9 @@ export const agentsList: AgentType[] = [
     key: 'DOUBLE_Q_LEARNING',
     displayName: 'Double Q learning',
     params: [
-      { name: alpha, defaultValue: 0.5 },
-      { name: gamma, defaultValue: 0.8 },
-      { name: epsilon, defaultValue: 0.1 },
+      { name: alpha, value: 0.5 },
+      { name: gamma, value: 0.8 },
+      { name: epsilon, value: 0.1 },
     ],
   },
   {
@@ -2019,9 +2050,9 @@ export const agentsList: AgentType[] = [
     key: 'N_SOMETHINGOROTHER',
     displayName: 'n somethingorother',
     params: [
-      { name: alpha, defaultValue: 0.5 },
-      { name: gamma, defaultValue: 0.8 },
-      { name: epsilon, defaultValue: 0.1 },
+      { name: alpha, value: 0.5 },
+      { name: gamma, value: 0.8 },
+      { name: epsilon, value: 0.1 },
     ],
   },
 ];

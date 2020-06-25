@@ -11,6 +11,7 @@ const useAgentForm = (
   handleParamChange: (event: React.FormEvent<HTMLDivElement>) => void;
   handleSubmit: (event: React.FormEvent<HTMLDivElement>) => void;
 } => {
+  console.log('begin with editing agent:', editingAgent);
   const { addAgent, setAgentById, setEditingAgent } = useContext(AgentContext);
 
   const handleAgentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -18,6 +19,9 @@ const useAgentForm = (
     const { value } = target;
     const newAgent = agentsList.find((a) => a.key === value);
     if (!!newAgent) {
+      console.log('we setting new agent?');
+      const newSpecAgent = { ...newAgent, id: editingAgent.id };
+      console.log('if isEdit', isEdit, ': newagentset:', newSpecAgent);
       setEditingAgent((prevAgent: AgentType) => ({
         ...newAgent,
         id: isEdit ? prevAgent.id : newAgent.id,
@@ -31,7 +35,7 @@ const useAgentForm = (
     const param = editingAgent.params.find((p) => p.name === name);
     if (!!param) {
       const parsed = parseFloat(value);
-      if (isNaN(parsed)) param.defaultValue = parseFloat(value);
+      if (!isNaN(parsed)) param.value = parseFloat(value);
     }
   };
 

@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
-import { agentsList } from '../constants';
+import { agentsList, agentParamsEnum, agentKeysEnum } from '../constants';
 import { getLocal, setLocal } from 'utils';
 
 export interface AgentParameter {
-  name: 'alpha' | 'beta' | 'gamma' | 'epsilon';
-  defaultValue: number;
+  name: agentParamsEnum;
+  value: number;
 }
 
 export interface AgentType {
   id: string;
-  key: string;
+  key: agentKeysEnum;
   displayName: string;
   params: AgentParameter[];
 }
@@ -20,9 +20,9 @@ export const defaultAgent: AgentType = {
   key: 'MONTE_CARLO',
   displayName: 'Monte Carlo',
   params: [
-    { name: 'alpha', defaultValue: 0.5 },
-    { name: 'gamma', defaultValue: 0.8 },
-    { name: 'epsilon', defaultValue: 0.1 },
+    { name: 'alpha', value: 0.5 },
+    { name: 'gamma', value: 0.8 },
+    { name: 'epsilon', value: 0.1 },
   ],
 };
 

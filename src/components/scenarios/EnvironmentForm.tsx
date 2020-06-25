@@ -29,7 +29,6 @@ const EnvironmentForm: React.FunctionComponent<{ theme: ThemeType }> = (
   const { environment, episodes, setEnvironment, setEpisodes } = useContext(
     EnvironmentContext
   );
-  console.log('um, env: ', environment.displayName);
   return (
     <Box css={css}>
       <Box>

@@ -13,7 +13,7 @@ const StartButton = () => {
       }}
     >
       <div
-        onClick={() => console.log('whee')}
+        onClick={() => console.log('boink')}
         id="startbutton"
         style={{
           width: 0,

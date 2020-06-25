@@ -61,9 +61,7 @@ const DisplayParams: React.FunctionComponent<{ params: AgentParameter[] }> = ({
   params,
 }) => (
   <Box css={{ flexGrow: 1, marginRight: '10%', textAlign: 'right' }}>
-    {params.map(
-      (param) => `${letterMap[param.name]}: ${param.defaultValue + '  '}`
-    )}
+    {params.map((param) => `${letterMap[param.name]}: ${param.value + '  '}`)}
   </Box>
 );
 

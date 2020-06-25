@@ -26,31 +26,25 @@ const AgentForm: React.FunctionComponent<{
     agent,
     isEdit
   );
-
-  const handleFormSubmit = (event: React.FormEvent<HTMLDivElement>): void => {
+  const submitAndClose = (event: React.FormEvent<HTMLDivElement>) => {
     handleSubmit(event);
     closeForm();
   };
-
   return (
-    <Box as="form" onSubmit={handleFormSubmit} css={getFormCss(theme)}>
+    <Box as="form" onSubmit={submitAndClose} css={getFormCss(theme)}>
       <Label marginBottom="10px">Add/edit Agent</Label>
       <AgentSelect
         theme={theme}
-        name={agent.displayName}
+        agentKey={agent.key}
         handleChange={handleAgentChange}
       />
       {agent.params.map((param, idx) => (
-        <>
-          <Label key={idx} margin="5px">
-            {param.name}
-          </Label>
-          <ParamInput
-            theme={theme}
-            param={param}
-            handleChange={handleParamChange}
-          />
-        </>
+        <ParamInput
+          key={idx}
+          theme={theme}
+          param={param}
+          handleChange={handleParamChange}
+        />
       ))}
       <ButtonGroup theme={theme} closeForm={closeForm} />
     </Box>

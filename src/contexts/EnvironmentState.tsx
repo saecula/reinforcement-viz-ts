@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { envs, defaultEpisodes } from '../constants';
+import { envs, defaultEpisodes, envKeysEnum } from '../constants';
 import { getLocal, setLocal } from 'utils';
 
 export interface EnvironmentType {
-  key: string;
+  key: envKeysEnum;
   displayName: string;
   states: (any[] | undefined)[];
 }
