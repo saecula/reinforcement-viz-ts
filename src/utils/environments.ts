@@ -1,8 +1,13 @@
-import { EnvironmentKeys } from '../constants';
-import { RuntimeAgentMap, RuntimeAgentResults } from './scenarioRunner';
+import { EnvironmentKeys, Map } from '../constants';
+import { RuntimeAgentMap } from './episodeFactory';
 
-export interface Map<T> {
-  [x: string]: T;
+export interface AgentResult {
+  pathData: number[][];
+  rewards: number[];
+}
+
+export interface EpisodeResult {
+  [uuid: string]: AgentResult;
 }
 
 /*
@@ -35,7 +40,7 @@ export interface RuntimeEnvironment {
     actions: string[];
     done: boolean;
   };
-  runEpisodeForEachAgent(agents: RuntimeAgentMap): RuntimeAgentResults;
+  runEpisodeForEachAgent(agents: RuntimeAgentMap): EpisodeResult;
   reset(): void;
 }
 
@@ -96,7 +101,7 @@ export class RuntimeEnvironment {
   }
 
   runEpisodeForEachAgent(agents: RuntimeAgentMap) {
-    const result = {} as RuntimeAgentResults;
+    const result = {} as EpisodeResult;
     for (const key in agents) {
       const agent = agents[key];
       let isDone = false;
@@ -109,7 +114,7 @@ export class RuntimeEnvironment {
       }
 
       const reward = agent.calculateEpisodeResult();
-      result[key] = { path: this.path, reward };
+      result[key] = { pathData: this.path, rewards: [reward] };
       this.reset();
     }
     return result;

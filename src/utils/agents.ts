@@ -1,5 +1,4 @@
-import { Map } from './environments';
-import { AgentKeys } from '../constants';
+import { AgentKeys, Map } from '../constants';
 /*
 states: length and width of environment states for generating action value function and rewards maps
 * * * 

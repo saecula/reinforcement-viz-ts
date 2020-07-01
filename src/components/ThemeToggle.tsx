@@ -7,6 +7,7 @@ const getToggleCss = (theme: ThemeType): CSSObject => ({
   color: theme.onBackground,
   backgroundColor: theme.background,
   fontSize: '17px',
+  outline: 'none',
   // todo: switch style
 });
 

@@ -2,6 +2,12 @@ import { EnvironmentType, AgentType } from 'contexts';
 
 export const defaultEpisodes = 40;
 
+export const defaultBatchSize = 10;
+
+export interface Map<T> {
+  [x: string]: T;
+}
+
 export type envKeysEnum = 'CLIFF' | 'WIND' | 'TUNNEL' | 'CASINO';
 export type agentKeysEnum =
   | 'MONTE_CARLO'
