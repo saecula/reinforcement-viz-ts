@@ -15,7 +15,7 @@
     "@types/rebass": "^4.0.6",
     "@types/rebass__forms": "^4.0.2",
     "@types/uuid": "^8.0.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "csstype": "^2.6.10",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
